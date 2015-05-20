@@ -41,7 +41,32 @@ function pingpong_form_submit($form, &$form_state) {
     $form_state['redirect'] = 'success';
 }
 
-function success_results(){
+function success_results() {
     $answer = $_SESSION['number'];
-    return 'This is the answer: ' . $answer;
+
+    if(is_numeric($answer)) {
+        $output = "<ul>";
+        $count = 1;
+
+        while($count <= $answer)
+        {
+            if($count % 3 == 0 && $count % 5 == 0) {
+                $output .= "<li>Ping-Pong</li>";
+            }
+            elseif($count % 5 == 0) {
+                $output .= "<li>Pong</li>";
+            }
+            elseif($count % 3 == 0) {
+                $output .= "<li>Ping</li>";
+            }
+            else {
+                $output .= "<li>$count</li>";
+            }
+            $count++;
+        }
+        return $output;
+
+    } else {
+        return 'Sorry, please enter a number';
+    }
 }
