@@ -1,0 +1,47 @@
+<?php
+
+function pingpong_menu(){
+    $item = array();
+    $item['input'] = [
+        'title' => 'Ping Pong Form',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('pingpong_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    ];
+
+    $item['success'] = [
+        'title' => 'Results',
+        'page callback' => 'success_results',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    ];
+
+    return $item;
+}
+
+function pingpong_form(){
+    $form['count'] = [
+        '#title' => 'Input Number',
+        '#type' => 'textfield',
+        '#description' => t('Enter number for ping ponging.'),
+    ];
+
+    $form['submit'] = [
+        '#type' => 'submit',
+        '#value' => 'Submit',
+    ];
+
+    return $form;
+}
+
+function pingpong_form_submit($form, &$form_state) {
+    $input = $form_state['values']['count'];
+    $_SESSION['number'] = $input;
+    $form_state['redirect'] = 'success';
+}
+
+function success_results(){
+    $answer = $_SESSION['number'];
+    return 'This is the answer: ' . $answer;
+}

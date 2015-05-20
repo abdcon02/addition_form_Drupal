@@ -1,0 +1,5 @@
+name = Pingpong
+description = Counts up to input number, replacing multiples of 3 for ping, multiples of 5 for pong, and pingpong for multiples of both.
+package = Epicodus Examples
+core = 7.x
+files[] = pingpong.module
